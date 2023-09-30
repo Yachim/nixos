@@ -115,7 +115,7 @@
       imagemagick
       home-manager
       tree
-      nautilus
+      gnome.nautilus
     ];
   };
 
