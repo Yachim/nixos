@@ -1,0 +1,15 @@
+[submodule "omz-custom/plugins/autoupdate-oh-my-zsh-plugins"]
+	path = omz-custom/plugins/autoupdate-oh-my-zsh-plugins
+	url = https://github.com/TamCore/autoupdate-oh-my-zsh-plugins
+[submodule "omz-custom/plugins/zsh-autosuggestions"]
+	path = omz-custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "omz-custom/plugins/zsh-syntax-highlighting"]
+	path = omz-custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "omz-custom/plugins/zsh-autocomplete"]
+	path = omz-custom/plugins/zsh-autocomplete
+	url = https://github.com/marlonrichert/zsh-autocomplete.git
+[submodule "omz-custom/themes/powerlevel10k"]
+	path = omz-custom/themes/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
