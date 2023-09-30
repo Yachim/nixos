@@ -10,20 +10,50 @@
   ];
 
   home.file = {
+    ".config/eww" = {
+      source = ./eww;
+      recursive = true;
+    };
+    ".config/hypr" = {
+      source = ./hypr;
+      recursive = true;
+    };
+    ".config/nvim" = {
+      source = ./nvim;
+      recursive = true;
+    };
+    ".config/zellij" = {
+      source = ./zellij;
+      recursive = true;
+    };
+    ".p10k.zsh".source = ./.p10k.zsh;
+    ".zshrc".source = ./.zshrc;
   };
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
 
+  services = {
+    dunst = {
+      enable = true;
+    };
+  };
+
   programs = {
     home-manager.enable = true;
+
+    kitty = {
+      enable = true;
+      font.name = "AurulentSansMono-Regular Nerd Font Complete";
+      settings.background_opacity = "0.85";
+    };
 
     zsh = {
       enable = true;
       oh-my-zsh = {
         enable = true;
-        custom = "./omz-custom";
+        custom = "$PWD/omz-custom";
         plugins = [
           "git"
           "git-auto-fetch"
@@ -45,6 +75,18 @@
           "autoupdate"
         ];
         theme = "powerlevel10k/powerlevel10k";
+      };
+    };
+
+    gh = {
+      enable = true;
+      gitCredentialHelper = {
+        enable = true;
+	hosts = [ "https://github.com" "https://gist.github.com" ];
+      };
+      settings = {
+        protocol = "https";
+	editor = "nvim";
       };
     };
 

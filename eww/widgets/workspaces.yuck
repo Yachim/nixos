@@ -1,0 +1,38 @@
+(defpoll active-workspace :interval "0.5s"
+                          :initial 1
+  "python ~/.config/eww/scripts/check_active_workspace.py")
+
+(defpoll occupied-1 :interval "0.5s"
+                    :initial false
+  "python ~/.config/eww/scripts/check_workspace_occupied.py 1")
+(defpoll occupied-2 :interval "0.5s"
+                    :initial false
+  "python ~/.config/eww/scripts/check_workspace_occupied.py 2")
+(defpoll occupied-3 :interval "0.5s"
+                    :initial false
+  "python ~/.config/eww/scripts/check_workspace_occupied.py 3")
+(defpoll occupied-4 :interval "0.5s"
+                    :initial false
+  "python ~/.config/eww/scripts/check_workspace_occupied.py 4")
+
+(defwidget workspaces []
+  (box :spacing 5
+       :valign "center"
+    (button :class "workspace-button${active-workspace == 1 ? " active" : occupied-1 ? " occupied" : ""}"
+            :onclick "hyprctl dispatch workspace 1"
+      ""
+      )
+    (button :class "workspace-button${active-workspace == 2 ? " active" : occupied-2 ? " occupied" : ""}"
+            :onclick "hyprctl dispatch workspace 2"
+      ""
+      )
+    (button :class "workspace-button${active-workspace == 3 ? " active" : occupied-3 ? " occupied" : ""}"
+            :onclick "hyprctl dispatch workspace 3"
+      ""
+      )
+    (button :class "workspace-button${active-workspace == 4 ? " active" : occupied-4 ? " occupied" : ""}"
+            :onclick "hyprctl dispatch workspace 4"
+      ""
+      )
+    )
+  )

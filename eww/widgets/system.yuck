@@ -1,0 +1,52 @@
+(defvar power-open false)
+
+(defwindow power
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :anchor "center center")
+  :stacking "overlay"
+  (box :spacing 20
+       :class "power-menu"
+    (button :onclick "shutdown now"
+      "")
+    (button :onclick "gtklock -c ~/.config/gtklock/config.ini"
+      "")
+    (button :onclick "shutdown now -r"
+      "")
+    )
+  )
+
+(defwidget circle [val icon hover ?classes clockwise]
+    (circular-progress :value val
+                       :thickness 3
+                       :start-at 75
+                       :clockwise clockwise
+                       :class "circle ${classes}"
+                       :tooltip hover
+      icon)
+  )
+
+(defwidget system []
+  (box :halign "end"
+       :spacing 10
+    (button :class "volume"
+            :style "font-size: 22px;"
+      "")
+    (button :class "volume"
+            :style "font-size: 30px;"
+      "")
+    (circle :val {EWW_BATTERY.BAT0.capacity}
+            :icon ""
+            :hover "Battery ${EWW_BATTERY.BAT0.status == "Discharging" ? " discharging" : " recharging"}: ${EWW_BATTERY.BAT0.capacity}%"
+            :clockwise true)
+    (circle :val {EWW_RAM.used_mem_perc}
+            :icon ""
+            :classes "ram-circle"
+            :hover "Used RAM: ${round(EWW_RAM.used_mem / 1000000, 0)}/${round(EWW_RAM.total_mem / 1000000, 0)}"
+            :clockwise false)
+    (button :class "power-button"
+            :onclick {power-open ? "eww close power & eww update power-open=false" : "eww open power & eww update power-open=true"}
+      "")
+    )
+  )

@@ -1,0 +1,3 @@
+return {
+  { "bhurlow/vim-parinfer" },
+}

@@ -21,7 +21,7 @@ in
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      yachim = import ../home/home.nix;
+      yachim = import ../home.nix;
     };
   };
 
@@ -77,6 +77,7 @@ in
     opengl = {
       enable = true;
       driSupport = true;
+
       driSupport32Bit = true;
     };
     pulseaudio.enable = true;
@@ -122,6 +123,7 @@ in
       wl-clipboard
       imagemagick
       home-manager
+      tree
     ];
   };
 
