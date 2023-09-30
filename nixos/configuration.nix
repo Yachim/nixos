@@ -1,23 +1,15 @@
 # FIXME: not in config:
-# - icon from systemsettings
 # - nix-channel
-# - omz installation
 # - hardware specific
 
 { inputs, config, pkgs, ... }:
-let
-  # FIXME:
-  # sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
-  # sudo nix-channel --update
-  # unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
 {
   imports =
     [
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
     ];
-  
+
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
@@ -86,7 +78,7 @@ in
       modesetting.enable = true;
       powerManagement = {
         enable = false;
-	finegrained = false;
+	      finegrained = false;
       };
       open = true;
       nvidiaSettings = true;
@@ -108,10 +100,9 @@ in
       discord
       kitty
       gh
-      dunst
+      mako
       eww-wayland
       rofi-wayland
-      dolphin
       oh-my-zsh
       lightdm
       zellij
@@ -124,6 +115,7 @@ in
       imagemagick
       home-manager
       tree
+      nautilus
     ];
   };
 

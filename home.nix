@@ -35,7 +35,7 @@
   };
 
   services = {
-    dunst = {
+    mako = {
       enable = true;
     };
   };
@@ -82,11 +82,11 @@
       enable = true;
       gitCredentialHelper = {
         enable = true;
-	hosts = [ "https://github.com" "https://gist.github.com" ];
+    hosts = [ "https://github.com" "https://gist.github.com" ];
       };
       settings = {
         protocol = "https";
-	editor = "nvim";
+    editor = "nvim";
       };
     };
 
