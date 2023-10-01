@@ -1,24 +1,22 @@
-(defvar power-open false)
+(defvar settings-open false)
 
-(defwindow power
-  :monitor 0
-  :geometry (geometry :x "0%"
-                      :y "0%"
-                      :anchor "center center")
-  :stacking "overlay"
-  (box :spacing 20
-       :class "power-menu"
-    (button :onclick "shutdown now"
-      "")
-    (button :onclick "gtklock -c ~/.config/gtklock/config.ini"
-      "")
-    (button :onclick "shutdown now -r"
-      "")
-    )
-  )
+(defpoll sound-val :interval "0.5s"
+                   :run-while settings-open
+   "~/.config/eww/scripts/get_amixer.sh Master")
+(defpoll sound-muted :interval "0.5s"
+                     :run-while settings-open
+   "~/.config/eww/scripts/amixer_is_muted.sh Master") ; 0 = muted
 
-(defwidget circle [val icon hover ?classes clockwise]
+(defpoll mic-val :interval "0.5s"
+                 :run-while settings-open
+   "~/.config/eww/scripts/get_amixer.sh Capture")
+(defpoll mic-muted :interval "0.5s"
+                   :run-while settings-open
+   "~/.config/eww/scripts/amixer_is_muted.sh Capture") ; 0 = muted
+
+(defwidget circle [val icon hover ?classes ?visible clockwise]
     (circular-progress :value val
+                       :visible visible
                        :thickness 3
                        :start-at 75
                        :clockwise clockwise
@@ -27,26 +25,90 @@
       icon)
   )
 
+(defwindow settings
+  :monitor 0
+  :geometry (geometry :y "20px"
+                      :anchor "top right")
+  :namespace "eww-window"
+  :stacking "overlay"
+  (revealer
+    :transition "slideleft"
+    :reveal settings-open
+    :duration "400ms"
+    (box :spacing 10
+         :orientation "vertical"
+         :class "settings-menu"
+      (box :spacing 10
+        (button :onclick "systemctl poweroff"
+                :class "power-button"
+          "")
+        (button :onclick "gtklock -c ~/.config/gtklock/config.ini"
+                :class "power-button"
+          "")
+        (button :onclick "systemctl restart"
+                :class "power-button"
+          "")
+        (circle :val {EWW_BATTERY.BAT0.capacity}
+                :visible {EWW_BATTERY ?: false}
+                :icon ""
+                :hover "Battery ${EWW_BATTERY.BAT0.status == "Discharging" ? " discharging" : " recharging"}: ${EWW_BATTERY.BAT0.capacity}%"
+                :clockwise true)
+        (circle :val {EWW_RAM.used_mem_perc}
+                :icon " "
+                :classes "font-12"
+                :hover "RAM: ${round(EWW_RAM.used_mem / 1000000, 0)}/${round(EWW_RAM.total_mem / 1000000, 0)}"
+                :clockwise false)
+        ; TODO: is this percentage?
+        (circle :val {EWW_CPU.avg}
+                :icon "   "
+                :classes "font-12"
+                :hover "CPU: ${round(EWW_CPU.avg, 2)}%"
+                :clockwise false)
+        )
+        (box :spacing 20
+             :space-evenly false
+             :halign "center"
+          (button :onclick "amixer sset Master toggle"
+                  :class "font-16"
+              {sound-muted == "true" ? "󰝟" :
+                sound-val < 33 ? "󰕿" :
+                  sound-val < 66 ? "󰖀" : "󰕾"}
+            )
+          (scale :value sound-val
+                 :width 200
+                 :min 0
+                 :max 100
+                 :onchange "amixer sset Master {}%"
+                 :orientation "h")
+          )
+        (box :spacing 20
+             :space-evenly false
+             :halign "center"
+          (button :onclick "amixer sset Capture toggle"
+                  :class "font-16"
+              {mic-muted == "true" ? "󰍭" : "󰍬"}
+            )
+          (scale :value mic-val
+                 :width 200
+                 :min 0
+                 :max 100
+                 :draw-value false
+                 :onchange "amixer sset Capture {}%"
+                 :orientation "h")
+          )
+        ; TODO: brightness
+      )
+    )
+  )
+
 (defwidget system []
   (box :halign "end"
-       :spacing 10
-    (button :class "volume"
-            :style "font-size: 22px;"
-      "")
-    (button :class "volume"
-            :style "font-size: 30px;"
-      "")
-    (circle :val {EWW_BATTERY.BAT0.capacity}
-            :icon ""
-            :hover "Battery ${EWW_BATTERY.BAT0.status == "Discharging" ? " discharging" : " recharging"}: ${EWW_BATTERY.BAT0.capacity}%"
-            :clockwise true)
-    (circle :val {EWW_RAM.used_mem_perc}
-            :icon ""
-            :classes "ram-circle"
-            :hover "Used RAM: ${round(EWW_RAM.used_mem / 1000000, 0)}/${round(EWW_RAM.total_mem / 1000000, 0)}"
-            :clockwise false)
-    (button :class "power-button"
-            :onclick {power-open ? "eww close power & eww update power-open=false" : "eww open power & eww update power-open=true"}
-      "")
+       :spacing 5
+    (button :onclick "eww close bar"
+            :class "system-button"
+      "")
+    (button :onclick {settings-open ? "eww update settings-open=false" : "eww update settings-open=true"}
+            :class "system-button"
+      "󰒓")
     )
   )

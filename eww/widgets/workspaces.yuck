@@ -21,25 +21,59 @@
 (defwidget workspaces []
   (box :spacing 5
        :valign "center"
-    (button :class "workspace-button${active-workspace == 1 ? " active" : occupied-1 ? " occupied" : ""}"
+    (button :class "workspace-button ${active-workspace == 1 ? "active" : occupied-1 ? "occupied" : ""}"
             :onclick "hyprctl dispatch workspace 1"
-      ""
-      )
-    (button :class "workspace-button${active-workspace == 2 ? " active" : occupied-2 ? " occupied" : ""}"
+      "")
+    (button :class "workspace-button ${active-workspace == 2 ? "active" : occupied-2 ? "occupied" : ""}"
             :onclick "hyprctl dispatch workspace 2"
-      "󰈹"
-      )
-    (button :class "workspace-button${active-workspace == 3 ? " active" : occupied-3 ? " occupied" : ""}"
+      "󰈹")
+    (button :class "workspace-button workspace-button--smaller ${active-workspace == 3 ? "active" : occupied-3 ? "occupied" : ""}"
             :onclick "hyprctl dispatch workspace 3"
-      ""
-      )
-    (button :class "workspace-button${active-workspace == 4 ? " active" : occupied-4 ? " occupied" : ""}"
+      "")
+    (button :class "workspace-button workspace-button--smaller ${active-workspace == 4 ? "active" : occupied-4 ? "occupied" : ""}"
             :onclick "hyprctl dispatch workspace 4"
-      ""
-      )
-    (button :class "workspace-button${active-workspace == 5 ? " active" : occupied-5 ? " occupied" : ""}"
+      "")
+    (button :class "workspace-button workspace-button--smaller ${active-workspace == 5 ? "active" : occupied-5 ? "occupied" : ""}"
             :onclick "hyprctl dispatch workspace 5"
-      ""
+      "")
+    (button :class "workspace-button font-24"
+            :onclick "eww update extra-workspaces-open=${extra-workspaces-open ? false : true}"
+      "󰇘")
+    )
+  )
+
+(defvar extra-workspaces-open false)
+
+(defpoll extra-workspaces-list :interval "1s"
+                               :initial "[]"
+                               :run-while extra-workspaces-open
+  "python ~/.config/eww/scripts/load_extra_workspaces.py 6")
+
+(defwindow extra-workspaces
+  :monitor 0
+  :geometry (geometry :anchor "top center")
+  :namespace "eww-window"
+  :stacking "overlay"
+  (revealer
+    :transition "slidedown"
+    :reveal extra-workspaces-open
+    :duration "400ms"
+    (box :spacing 10
+         :orientation "vertical"
+         :class "extra-workspaces-widget"
+      (box :spacing 40
+           :class "extra-workspaces-heading"
+        (label :halign "center" :text "Id")
+        (label :halign "center" :text "Title")
+        (label :halign "center" :text "#Windows"))
+      (for workspace in extra-workspaces-list
+        (button :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :spacing 40
+            (label :halign "center" :text "${workspace.id}")
+            (label :halign "center" :text "${workspace.title}")
+            (label :halign "center" :text "${workspace.windows_cnt}"))
+          )
+        )
       )
     )
   )

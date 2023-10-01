@@ -24,6 +24,19 @@
   networking.networkmanager.enable = true;
 
   programs = {
+    regreet = {
+      enable = true;
+      settings = {
+        background = {
+          path = /yachimdata/images/lockscreen.jpg;
+          fit = "Cover";
+        };
+        commands = {
+          reboot = [ "systemctl" "reboot" ];
+          poweroff = [ "systemctl" "poweroff" ];
+        };
+      };
+    };
     git = {
       enable = true;
       config = {
@@ -67,7 +80,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "Hyprland --config /etc/greetd/hyprland.conf";
+          command = "cage -s -- regreet";
           user = "greeter";
         };
       };
@@ -103,8 +116,6 @@
   };
 
   environment = {
-    etc."greetd/gtkgreet.css".source = ../etc/greetd/gtkgreet.css;
-    etc."greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -136,8 +147,10 @@
       swww
       cliphist
       greetd.greetd
-      greetd.gtkgreet
+      greetd.regreet
       gtklock
+      cage
+      jq
     ];
   };
 

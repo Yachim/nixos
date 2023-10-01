@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from json import loads, dumps
 from subprocess import check_output
 from sys import argv

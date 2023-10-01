@@ -16,7 +16,127 @@
   ];
 
   home.file = {
-    ".config/eww".source = ./eww;
+    ".config/eww/eww.scss".text = ''
+      $bar-bg: rgba(#${config.colorScheme.colors.base00}, 0.75);
+      $unoccupied-workspace-button-color: rgba(#${config.colorScheme.colors.base03}, 0.7);
+      $inactive-workspace-button-color: rgba(#${config.colorScheme.colors.base04}, 0.8);
+      $text-color: #${config.colorScheme.colors.base07};
+
+      $settings-menu-bg: rgba(#${config.colorScheme.colors.base01}, 0.8);
+      $extra-workspaces-bg: $settings-menu-bg;
+
+      $circle-bg: $text-color;
+
+      $scale-bg: #${config.colorScheme.colors.base03};
+      $scale-value: #${config.colorScheme.colors.base0D};
+
+      .bar-widget {
+        color: $text-color;
+        padding-left: 22px;
+        padding-right: 12px;
+        background-color: $bar-bg;
+        border-radius: 100px;
+      }
+
+      button {
+        color: $text-color;
+        border: none;
+        background: none;
+        box-shadow: none;
+        text-shadow: none;
+      }
+
+      .workspace-button {
+        font-size: 20px;
+        color: $unoccupied-workspace-button-color;
+        font-weight: bold;
+
+        &.occupied {
+          color: $inactive-workspace-button-color;
+        }
+
+        &.active {
+          color: $text-color;
+        }
+
+        &--smaller {
+          font-size: 18px;
+        }
+      }
+
+      .system-button {
+        font-size: 24px;
+      }
+
+      .background {
+        background: none;
+      }
+
+      .settings-menu {
+        color: $text-color;
+        margin-right: 20px;
+        padding: 30px;
+        background-color: $settings-menu-bg;
+        border-radius: 25px;
+      }
+
+      .circle {
+        background-color: $circle-bg;
+      }
+
+      .font-12 {
+        font-size: 12px;
+      }
+
+      .font-16 {
+        font-size: 16px;
+      }
+
+      .font-24 {
+        font-size: 24px;
+      }
+
+      .power-button {
+        font-size: 20px;
+      }
+
+      scale * {
+        border: none;
+        padding: 0;
+        margin: 0;
+        min-height: 10px;
+        border-radius: 100px;
+      }
+
+      scale slider {
+        box-shadow:none;
+        background: none;
+      }
+
+      scale trough {
+        background-color: $scale-bg;
+      }
+
+      scale highlight {
+        background-color: $scale-value;
+      }
+
+      .extra-workspaces-widget {
+        color: $text-color;
+        padding: 30px;
+        background-color: $extra-workspaces-bg;
+        border-radius: 25px;
+        margin-top: 20px;
+      }
+
+      .extra-workspaces-heading {
+        font-weight: bold;
+      }
+    '';
+    ".config/eww/eww.yuck".source = ./eww/eww.yuck;
+    ".config/eww/scripts".source = ./eww/scripts;
+    ".config/eww/widgets".source = ./eww/widgets;
+
     ".config/gtklock".source = ./gtklock;
     ".config/hypr".source = ./hypr;
     ".config/nvim".source = ./nvim;
@@ -105,10 +225,10 @@
     mako = {
       enable = true;
       defaultTimeout = 5000;
-      backgroundColor = "#${config.colorScheme.colors.base01}E9";
+      backgroundColor = "#${config.colorScheme.colors.base01}D0";
       borderColor = "#00000000";
-      borderRadius = 10;
-      padding = "16";
+      borderRadius = 25;
+      padding = "90 25 25 25";
       progressColor = "#${config.colorScheme.colors.base0B}";
       textColor = "#${config.colorScheme.colors.base07}";
     };
@@ -132,7 +252,7 @@
       enable = true;
       gitCredentialHelper = {
         enable = true;
-        hosts = [ "https://github.com" "https://gist.github.com" ];
+        hosts = [ "https://github.com" ];
       };
       settings = {
         protocol = "https";

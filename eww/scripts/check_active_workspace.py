@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from json import loads
 from subprocess import check_output
 

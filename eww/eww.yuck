@@ -3,7 +3,7 @@
 (include "widgets/system.yuck")
 
 (defwidget bar_w []
-  (centerbox :class "bar"
+  (centerbox :class "bar-widget"
     (date)
     (workspaces)
     (system)
@@ -13,9 +13,10 @@
            :monitor 0
            :geometry (geometry :x "0%"
                                :y "20px"
-                               :width "98%"
+                               :width "1880px"
                                :height "50px"
                                :anchor "top center")
            :stacking "fg"
            :exclusive true
+           :namespace "eww-window"
   (bar_w))
