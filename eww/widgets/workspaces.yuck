@@ -16,7 +16,7 @@
   "python ~/.config/eww/scripts/check_workspace_occupied.py 4")
 (defpoll occupied-5 :interval "0.5s"
                     :initial false
-  "python ~/.config/eww/scripts/check_workspace_occupied.py 4")
+  "python ~/.config/eww/scripts/check_workspace_occupied.py 5")
 
 (defwidget workspaces []
   (box :spacing 5

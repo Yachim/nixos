@@ -57,11 +57,21 @@
   # TODO: set automatically
   time.timeZone = "Europe/Prague";
 
-  services.xserver = {
-    enable = true;
-    displayManager.lightdm.enable = true;
-    # TODO: NVIDIA - hardware specific
-    videoDrivers = ["nvidia"];
+  services = {
+    xserver = {
+      enable = true;
+      # TODO: NVIDIA - hardware specific
+      videoDrivers = ["nvidia"];
+    };
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "Hyprland --config /etc/greetd/hyprland.conf";
+          user = "greeter";
+        };
+      };
+    };
   };
 
   sound.enable = true;
@@ -93,7 +103,15 @@
   };
 
   environment = {
+    etc."greetd/gtkgreet.css".source = ../etc/greetd/gtkgreet.css;
+    etc."greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = "1";
+      NIXOS_OZONE_WL = "1";
+    };
     systemPackages = with pkgs; [
+      ripgrep
+      libnotify
       bat
       wget
       neofetch
@@ -104,7 +122,6 @@
       eww-wayland
       rofi-wayland
       oh-my-zsh
-      lightdm
       zellij
       python3
       unzip
@@ -116,6 +133,11 @@
       home-manager
       tree
       gnome.nautilus
+      swww
+      cliphist
+      greetd.greetd
+      greetd.gtkgreet
+      gtklock
     ];
   };
 

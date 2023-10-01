@@ -1,0 +1,4 @@
+[Default]
+show_panel=true
+paint_mode=brush
+early_exit=true

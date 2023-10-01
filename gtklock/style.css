@@ -1,0 +1,13 @@
+window {
+  background-image: url("/usr/share/system-imgs/lockscreen.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+window > overlay > box {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 70px;
+  border-radius: 30px;
+}
