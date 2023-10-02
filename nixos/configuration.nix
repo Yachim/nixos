@@ -18,9 +18,6 @@
   networking.networkmanager.enable = true;
 
   programs = {
-    regreet = {
-      enable = true;
-    };
     git = {
       enable = true;
       config = {
@@ -87,9 +84,26 @@
   environment = {
     etc = {
       "greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
-      "greetd/regreet.toml".source = lib.mkForce ../etc/greetd/regreet.toml;
-      "greetd/regreet.css".source = lib.mkForce ../etc/greetd/regreet.css;
-    };
+      "greetd/gtkgreet.css".text = ''
+        window {
+          background-image: url("/yachimdata/images/lockscreen.png");
+          background-size: cover;
+          color: #FBFBFD; /* base07 */
+        }
+
+        #window {
+          margin: 0 585px;
+          padding: 20px;
+          background-color: #28323A; /* base02 */
+          opacity: 0.8;
+          border-radius: 12px;
+        }
+
+        #window > box > box > box > label {
+          margin-right: 12px;
+        }
+      '';
+      };
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -122,11 +136,11 @@
       swww
       cliphist
       greetd.greetd
-      greetd.regreet
       greetd.gtkgreet
       gtklock
       cage
       jq
+      hyprpicker
     ];
   };
 

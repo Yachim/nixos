@@ -1,7 +1,0 @@
-[background]
-path = "/yachimdata/images/lockscreen.png"
-fit = "Cover"
-
-[commands]
-reboot = [ "systemctl", "reboot" ]
-poweroff = [ "systemctl", "poweroff" ]
