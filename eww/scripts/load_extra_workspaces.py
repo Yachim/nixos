@@ -27,4 +27,5 @@ workspaces_list = [{
 } for key, value in workspaces.items()]
 workspaces_list.sort(key=lambda x: x["id"])
 
-print(dumps(workspaces_list))
+if len(workspaces_list) == 0: print("empty")
+else: print(dumps(workspaces_list))

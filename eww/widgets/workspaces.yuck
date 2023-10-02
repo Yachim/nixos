@@ -18,6 +18,12 @@
                     :initial false
   "python ~/.config/eww/scripts/check_workspace_occupied.py 5")
 
+(defvar extra-workspaces-open false)
+
+(defpoll extra-workspaces-list :interval "1s"
+                               :initial "[]"
+  "python ~/.config/eww/scripts/load_extra_workspaces.py 6")
+
 (defwidget workspaces []
   (box :spacing 5
        :valign "center"
@@ -38,16 +44,10 @@
       "")
     (button :class "workspace-button font-24"
             :onclick "eww update extra-workspaces-open=${extra-workspaces-open ? false : true}"
+            :visible {extra-workspaces-list != "empty"}
       "󰇘")
     )
   )
-
-(defvar extra-workspaces-open false)
-
-(defpoll extra-workspaces-list :interval "1s"
-                               :initial "[]"
-                               :run-while extra-workspaces-open
-  "python ~/.config/eww/scripts/load_extra_workspaces.py 6")
 
 (defwindow extra-workspaces
   :monitor 0
@@ -56,7 +56,7 @@
   :stacking "overlay"
   (revealer
     :transition "slidedown"
-    :reveal extra-workspaces-open
+    :reveal {extra-workspaces-open && extra-workspaces-list != "empty"}
     :duration "400ms"
     (box :spacing 10
          :orientation "vertical"
