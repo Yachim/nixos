@@ -6,7 +6,7 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -20,7 +20,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "yachim-nixos-desktop";
   networking.networkmanager.enable = true;
 
   programs = {
@@ -53,8 +52,6 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      # TODO: hardware specific?
-      enableNvidiaPatches = true;
     };
     steam.enable = true;
     firefox.enable = true;
@@ -73,14 +70,12 @@
   services = {
     xserver = {
       enable = true;
-      # TODO: NVIDIA - hardware specific
-      videoDrivers = ["nvidia"];
     };
     greetd = {
       enable = true;
       settings = {
         default_session = {
-          command = "cage -s -- regreet";
+          command = "Hyprland --config /etc/greetd/hyprland.conf";
           user = "greeter";
         };
       };
@@ -96,17 +91,6 @@
       driSupport32Bit = true;
     };
     pulseaudio.enable = true;
-    # TODO: NVIDIA - hardware specific
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement = {
-        enable = false;
-	      finegrained = false;
-      };
-      open = true;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
   };
 
   users.users.yachim = {
@@ -116,6 +100,7 @@
   };
 
   environment = {
+    etc."greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";

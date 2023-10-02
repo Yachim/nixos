@@ -30,6 +30,15 @@
 
         modules = [
           ./nixos/configuration.nix
+          ./nixos/desktop.nix
+        ];
+      };
+      yachim-nixos-notebook = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs system; };
+
+        modules = [
+          ./nixos/configuration.nix
+          ./nixos/notebook.nix
         ];
       };
     };
