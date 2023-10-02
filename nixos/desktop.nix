@@ -1,9 +1,7 @@
-# FIXME: not in config:
-# - nix-channel
-# - hardware specific
-
 { inputs, config, pkgs, ... }:
 {
+  imports = [./hardware-configuration-desktop.nix];
+
   networking.hostName = "yachim-nixos-desktop";
 
   # nvidia
@@ -18,5 +16,9 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  environment.sessionVariables = {
+    YACHIM_CONFIG_DIR = "/home/yachim/nixos";
   };
 }

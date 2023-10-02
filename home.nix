@@ -228,7 +228,7 @@
       backgroundColor = "#${config.colorScheme.colors.base01}D0";
       borderColor = "#00000000";
       borderRadius = 25;
-      padding = "90 25 25 25";
+      margin = "25";
       progressColor = "#${config.colorScheme.colors.base0B}";
       textColor = "#${config.colorScheme.colors.base07}";
     };
@@ -313,8 +313,7 @@
       };
       oh-my-zsh = {
         enable = true;
-        # FIXME: dynamic
-        custom = "$HOME/.dotfiles-new/omz-custom";
+        custom = "$YACHIM_CONFIG_DIR/omz-custom";
         plugins = [
           "git"
           "git-auto-fetch"

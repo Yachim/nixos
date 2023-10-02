@@ -1,12 +1,7 @@
-# FIXME: not in config:
-# - nix-channel
-# - hardware specific
-
-{ inputs, config, pkgs, ... }:
+{ lib, inputs, config, pkgs, ... }:
 {
   imports =
     [
-      /etc/nixos/hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -25,16 +20,6 @@
   programs = {
     regreet = {
       enable = true;
-      settings = {
-        background = {
-          path = /yachimdata/images/lockscreen.jpg;
-          fit = "Cover";
-        };
-        commands = {
-          reboot = [ "systemctl" "reboot" ];
-          poweroff = [ "systemctl" "poweroff" ];
-        };
-      };
     };
     git = {
       enable = true;
@@ -100,7 +85,11 @@
   };
 
   environment = {
-    etc."greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
+    etc = {
+      "greetd/hyprland.conf".source = ../etc/greetd/hyprland.conf;
+      "greetd/regreet.toml".source = lib.mkForce ../etc/greetd/regreet.toml;
+      "greetd/regreet.css".source = lib.mkForce ../etc/greetd/regreet.css;
+    };
     sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
@@ -134,6 +123,7 @@
       cliphist
       greetd.greetd
       greetd.regreet
+      greetd.gtkgreet
       gtklock
       cage
       jq
