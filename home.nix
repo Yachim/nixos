@@ -224,10 +224,11 @@
     mako = {
       enable = true;
       defaultTimeout = 5000;
-      backgroundColor = "#${config.colorScheme.colors.base01}D0";
-      borderColor = "#00000000";
-      borderRadius = 25;
-      margin = "25";
+      backgroundColor = "#${config.colorScheme.colors.base02}D0";
+      borderColor = "#${config.colorScheme.colors.base06}F0";
+      borderRadius = 10;
+      margin = "50";
+      anchor = "top-right";
       progressColor = "#${config.colorScheme.colors.base0B}";
       textColor = "#${config.colorScheme.colors.base07}";
     };
