@@ -91,8 +91,11 @@
           color: #FBFBFD; /* base07 */
         }
 
+        revealer {
+          padding: 0 500px;
+        }
+
         #window {
-          margin: 0 585px;
           padding: 20px;
           background-color: #28323A; /* base02 */
           opacity: 0.8;
