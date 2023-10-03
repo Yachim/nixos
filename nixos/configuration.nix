@@ -77,7 +77,7 @@
 
   users.users.yachim = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.zsh;
   };
 
@@ -124,6 +124,7 @@
       python310Packages.pip
       libgccjit
 
+      openssl
       obsidian
       ripgrep
       libnotify
@@ -170,6 +171,12 @@
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   system.stateVersion = "23.05";
 }
