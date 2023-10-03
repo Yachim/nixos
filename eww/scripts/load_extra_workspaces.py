@@ -1,5 +1,5 @@
 from json import loads, dumps
-from subprocess import check_output
+from subprocess import check_output, run
 from sys import argv
 
 minimum = int(argv[1])
@@ -27,5 +27,7 @@ workspaces_list = [{
 } for key, value in workspaces.items()]
 workspaces_list.sort(key=lambda x: x["id"])
 
-if len(workspaces_list) == 0: print("empty")
+if len(workspaces_list) == 0: 
+    print("empty")
+    run(["eww", "update", "extra-workspaces-open=false"])
 else: print(dumps(workspaces_list))

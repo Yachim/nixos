@@ -56,7 +56,7 @@
   :stacking "overlay"
   (revealer
     :transition "slidedown"
-    :reveal {extra-workspaces-open && extra-workspaces-list != "empty"}
+    :reveal {extra-workspaces-open}
     :duration "400ms"
     (box :spacing 10
          :orientation "vertical"
