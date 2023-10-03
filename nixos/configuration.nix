@@ -109,6 +109,21 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+      lazygit
+      fd
+      go
+      jdk
+      php
+      nodejs
+      julia
+      cargo
+      rustc
+      tree-sitter
+      luarocks
+      php82Packages.composer
+      python310Packages.pip
+      libgccjit
+
       obsidian
       ripgrep
       libnotify
