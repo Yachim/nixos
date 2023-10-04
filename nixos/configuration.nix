@@ -126,7 +126,8 @@
       php82Packages.composer
       python310Packages.pip
       libgccjit
-
+      vimPlugins.cmp-nvim-lsp
+      vimPlugins.nvim-treesitter-parsers.yaml
       openssl
       obsidian
       ripgrep
@@ -160,9 +161,9 @@
       cage
       jq
       hyprpicker
-      vimPlugins.cmp-nvim-lsp
       gnumake
       gcc_multi
+      fish
     ];
   };
 
