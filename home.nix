@@ -24,7 +24,7 @@
       $settings-menu-bg: rgba(#${config.colorScheme.colors.base01}, 0.8);
       $extra-workspaces-bg: $settings-menu-bg;
 
-      $circle-bg: $text-color;
+      $circle-bg: #${config.colorScheme.colors.base03};
 
       $scale-bg: #${config.colorScheme.colors.base03};
       $scale-value: #${config.colorScheme.colors.base0D};
