@@ -160,6 +160,9 @@
       cage
       jq
       hyprpicker
+      vimPlugins.cmp-nvim-lsp
+      gnumake
+      gcc_multi
     ];
   };
 
