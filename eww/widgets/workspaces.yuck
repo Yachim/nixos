@@ -67,7 +67,7 @@
         (label :halign "center" :text "Title")
         (label :halign "center" :text "#Windows"))
       (for workspace in extra-workspaces-list
-        (button :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (button :onclick "hyprctl dispatch workspace ${workspace.id}; eww update extra-workspaces-open=false"
           (box :spacing 40
             (label :halign "center" :text "${workspace.id}")
             (label :halign "center" :text "${workspace.title}")
