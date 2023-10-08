@@ -164,6 +164,8 @@
       gnumake
       gcc_multi
       fish
+      dotnet-sdk_7
+      dotnet-runtime_7
     ];
   };
 
