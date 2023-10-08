@@ -166,6 +166,7 @@
       fish
       dotnet-sdk_7
       dotnet-runtime_7
+      fsautocomplete
     ];
   };
 
