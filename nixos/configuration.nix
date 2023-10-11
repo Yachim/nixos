@@ -18,6 +18,9 @@
   networking.networkmanager.enable = true;
 
   programs = {
+    noisetorch = {
+      enable = true;
+    };
     git = {
       enable = true;
       config = {
@@ -135,7 +138,7 @@
       bat
       wget
       neofetch
-      discord
+      discord-canary
       kitty
       gh
       mako
