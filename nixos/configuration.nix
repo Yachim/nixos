@@ -165,6 +165,9 @@
       gcc_multi
       fish
       wev
+      dotnet-sdk_7
+      dotnet-runtime_7
+      fsautocomplete
     ];
   };
 
