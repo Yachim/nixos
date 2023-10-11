@@ -164,6 +164,7 @@
       gnumake
       gcc_multi
       fish
+      wev
     ];
   };
 
