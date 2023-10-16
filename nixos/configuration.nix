@@ -115,6 +115,7 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+      godot_4
       lazygit
       fd
       go
