@@ -72,10 +72,12 @@
     opengl = {
       enable = true;
       driSupport = true;
-
       driSupport32Bit = true;
     };
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
   };
 
   users.users.yachim = {
@@ -115,6 +117,10 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+      stylua
+      mesa
+      vulkan-tools
+      vulkan-headers
       spotify
       godot_4
       lazygit
