@@ -42,6 +42,10 @@
     firefox.enable = true;
     zsh = {
       enable = true;
+      shellAliases = {
+        # https://gist.github.com/nate-moo/c9d9db08c56f6389e1c12126bd47d360
+        xwlscreen="wf-recorder --muxer=mpegts --codec=libx264 --file=udp://0.0.0.0:1111 & mpv -vo=xv udp://0.0.0.0:1111 --no-cache --untimed --no-demuxer-thread --video-sync=audio --vd-lavc-threads=1; pkill wf-recorder; pkill mpv";
+      };
     };
   };
 
@@ -117,6 +121,8 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+      wf-recorder
+      mpv
       stylua
       mesa
       vulkan-tools
